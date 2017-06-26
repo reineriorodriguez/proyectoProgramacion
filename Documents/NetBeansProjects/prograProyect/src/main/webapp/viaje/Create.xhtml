@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ViajeCreateDlg" widgetVar="ViajeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateViajeTitle}">
+            <h:form id="ViajeCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{viajeController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateViajeLabel_codViaje}" for="codViaje" />
+                        <p:inputText id="codViaje" value="#{viajeController.selected.codViaje}" title="#{bundle.CreateViajeTitle_codViaje}" required="true" requiredMessage="#{bundle.CreateViajeRequiredMessage_codViaje}"/>
+                        <p:outputLabel value="#{bundle.CreateViajeLabel_precio}" for="precio" />
+                        <p:inputText id="precio" value="#{viajeController.selected.precio}" title="#{bundle.CreateViajeTitle_precio}" required="true" requiredMessage="#{bundle.CreateViajeRequiredMessage_precio}"/>
+                        <p:outputLabel value="#{bundle.CreateViajeLabel_codDestino}" for="codDestino" />
+                        <p:selectOneMenu id="codDestino" value="#{viajeController.selected.codDestino}" required="true" requiredMessage="#{bundle.EditViajeRequiredMessage_codDestino}">
+                            <f:selectItems value="#{destinoController.itemsAvailableSelectOne}"
+                                           var="codDestinoItem"
+                                           itemValue="#{codDestinoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateViajeLabel_codBus}" for="codBus" />
+                        <p:selectOneMenu id="codBus" value="#{viajeController.selected.codBus}" required="true" requiredMessage="#{bundle.EditViajeRequiredMessage_codBus}">
+                            <f:selectItems value="#{busController.itemsAvailableSelectOne}"
+                                           var="codBusItem"
+                                           itemValue="#{codBusItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{viajeController.create}" value="#{bundle.Save}" update="display,:ViajeListForm:datalist,:growl" oncomplete="handleSubmit(args,'ViajeCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ViajeCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
