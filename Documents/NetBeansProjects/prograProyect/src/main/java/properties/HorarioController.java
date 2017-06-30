@@ -1,8 +1,9 @@
-package otro;
+package properties;
 
-import entidades.Bus;
-import otro.util.JsfUtil;
-import otro.util.JsfUtil.PersistAction;
+import Entidades.Horario;
+import properties.util.JsfUtil;
+import properties.util.JsfUtil.PersistAction;
+import facade.HorarioFacade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,23 +19,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("busController")
+@Named("horarioController")
 @SessionScoped
-public class BusController implements Serializable {
+public class HorarioController implements Serializable {
 
     @EJB
-    private otro.BusFacade ejbFacade;
-    private List<Bus> items = null;
-    private Bus selected;
+    private facade.HorarioFacade ejbFacade;
+    private List<Horario> items = null;
+    private Horario selected;
 
-    public BusController() {
+    public HorarioController() {
     }
 
-    public Bus getSelected() {
+    public Horario getSelected() {
         return selected;
     }
 
-    public void setSelected(Bus selected) {
+    public void setSelected(Horario selected) {
         this.selected = selected;
     }
 
@@ -44,36 +45,36 @@ public class BusController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private BusFacade getFacade() {
+    private HorarioFacade getFacade() {
         return ejbFacade;
     }
 
-    public Bus prepareCreate() {
-        selected = new Bus();
+    public Horario prepareCreate() {
+        selected = new Horario();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("BusCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("HorarioCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("BusUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("HorarioUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("BusDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("HorarioDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Bus> getItems() {
+    public List<Horario> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -108,29 +109,29 @@ public class BusController implements Serializable {
         }
     }
 
-    public Bus getBus(java.lang.Integer id) {
+    public Horario getHorario(java.lang.Integer id) {
         return getFacade().find(id);
     }
 
-    public List<Bus> getItemsAvailableSelectMany() {
+    public List<Horario> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<Bus> getItemsAvailableSelectOne() {
+    public List<Horario> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Bus.class)
-    public static class BusControllerConverter implements Converter {
+    @FacesConverter(forClass = Horario.class)
+    public static class HorarioControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            BusController controller = (BusController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "busController");
-            return controller.getBus(getKey(value));
+            HorarioController controller = (HorarioController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "horarioController");
+            return controller.getHorario(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -150,11 +151,11 @@ public class BusController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Bus) {
-                Bus o = (Bus) object;
-                return getStringKey(o.getCodBus());
+            if (object instanceof Horario) {
+                Horario o = (Horario) object;
+                return getStringKey(o.getCodHorario());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Bus.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Horario.class.getName()});
                 return null;
             }
         }

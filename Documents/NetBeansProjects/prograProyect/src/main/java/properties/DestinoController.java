@@ -1,8 +1,9 @@
-package otro;
+package properties;
 
-import entidades.Destino;
-import otro.util.JsfUtil;
-import otro.util.JsfUtil.PersistAction;
+import Entidades.Destino;
+import properties.util.JsfUtil;
+import properties.util.JsfUtil.PersistAction;
+import facade.DestinoFacade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -23,7 +24,7 @@ import javax.faces.convert.FacesConverter;
 public class DestinoController implements Serializable {
 
     @EJB
-    private otro.DestinoFacade ejbFacade;
+    private facade.DestinoFacade ejbFacade;
     private List<Destino> items = null;
     private Destino selected;
 

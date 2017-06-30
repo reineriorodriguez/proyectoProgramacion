@@ -14,14 +14,12 @@
                     <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
                         <h:outputText value="#{bundle.ViewUsuarioLabel_codUsuario}"/>
                         <h:outputText value="#{usuarioController.selected.codUsuario}" title="#{bundle.ViewUsuarioTitle_codUsuario}"/>
-                        <h:outputText value="#{bundle.ViewUsuarioLabel_apellido}"/>
-                        <h:outputText value="#{usuarioController.selected.apellido}" title="#{bundle.ViewUsuarioTitle_apellido}"/>
-                        <h:outputText value="#{bundle.ViewUsuarioLabel_nombre}"/>
-                        <h:outputText value="#{usuarioController.selected.nombre}" title="#{bundle.ViewUsuarioTitle_nombre}"/>
                         <h:outputText value="#{bundle.ViewUsuarioLabel_pwdUsuario}"/>
                         <h:outputText value="#{usuarioController.selected.pwdUsuario}" title="#{bundle.ViewUsuarioTitle_pwdUsuario}"/>
                         <h:outputText value="#{bundle.ViewUsuarioLabel_usrUsuario}"/>
                         <h:outputText value="#{usuarioController.selected.usrUsuario}" title="#{bundle.ViewUsuarioTitle_usrUsuario}"/>
+                        <h:outputText value="#{bundle.ViewUsuarioLabel_cliente}"/>
+                        <h:outputText value="#{usuarioController.selected.cliente}" title="#{bundle.ViewUsuarioTitle_cliente}"/>
                         <h:outputText value="#{bundle.ViewUsuarioLabel_tipoUsr}"/>
                         <h:outputText value="#{usuarioController.selected.tipoUsr}" title="#{bundle.ViewUsuarioTitle_tipoUsr}"/>
                     </p:panelGrid>

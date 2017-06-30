@@ -15,11 +15,14 @@
                         <p:outputLabel value="#{bundle.EditEmpresaLabel_codEmpresa}" for="codEmpresa" />
                         <p:inputText id="codEmpresa" value="#{empresaController.selected.codEmpresa}" title="#{bundle.EditEmpresaTitle_codEmpresa}" required="true" requiredMessage="#{bundle.EditEmpresaRequiredMessage_codEmpresa}"/>
                         <p:outputLabel value="#{bundle.EditEmpresaLabel_nombreEmpresa}" for="nombreEmpresa" />
-                        <p:inputText id="nombreEmpresa" value="#{empresaController.selected.nombreEmpresa}" title="#{bundle.EditEmpresaTitle_nombreEmpresa}" />
-                        <p:outputLabel value="#{bundle.EditEmpresaLabel_pwdEmpresa}" for="pwdEmpresa" />
-                        <p:inputText id="pwdEmpresa" value="#{empresaController.selected.pwdEmpresa}" title="#{bundle.EditEmpresaTitle_pwdEmpresa}" />
-                        <p:outputLabel value="#{bundle.EditEmpresaLabel_usrEmpresa}" for="usrEmpresa" />
-                        <p:inputText id="usrEmpresa" value="#{empresaController.selected.usrEmpresa}" title="#{bundle.EditEmpresaTitle_usrEmpresa}" />
+                        <p:inputText id="nombreEmpresa" value="#{empresaController.selected.nombreEmpresa}" title="#{bundle.EditEmpresaTitle_nombreEmpresa}" required="true" requiredMessage="#{bundle.EditEmpresaRequiredMessage_nombreEmpresa}"/>
+                        <p:outputLabel value="#{bundle.EditEmpresaLabel_codUsuario}" for="codUsuario" />
+                        <p:selectOneMenu id="codUsuario" value="#{empresaController.selected.codUsuario}" required="true" requiredMessage="#{bundle.EditEmpresaRequiredMessage_codUsuario}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="codUsuarioItem"
+                                           itemValue="#{codUsuarioItem}"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{empresaController.update}" value="#{bundle.Save}" update="display,:EmpresaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EmpresaEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="EmpresaEditDialog.hide()"/>

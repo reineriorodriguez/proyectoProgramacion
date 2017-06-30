@@ -1,8 +1,9 @@
-package otro;
+package properties;
 
-import entidades.Empresa;
-import otro.util.JsfUtil;
-import otro.util.JsfUtil.PersistAction;
+import Entidades.Empresa;
+import properties.util.JsfUtil;
+import properties.util.JsfUtil.PersistAction;
+import facade.EmpresaFacade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -23,7 +24,7 @@ import javax.faces.convert.FacesConverter;
 public class EmpresaController implements Serializable {
 
     @EJB
-    private otro.EmpresaFacade ejbFacade;
+    private facade.EmpresaFacade ejbFacade;
     private List<Empresa> items = null;
     private Empresa selected;
 

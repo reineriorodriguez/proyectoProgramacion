@@ -35,15 +35,15 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDestinoTitle_codRuta}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.codRuta}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDestinoTitle_codHorario}"/>
                             </f:facet>
                             <h:outputText value="#{item.codHorario}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDestinoTitle_codRuta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codRuta}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{destinoController.prepareCreate}" update=":DestinoCreateForm" oncomplete="PF('DestinoCreateDialog').show()"/>

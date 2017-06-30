@@ -1,8 +1,9 @@
-package otro;
+package properties;
 
-import entidades.Reserva;
-import otro.util.JsfUtil;
-import otro.util.JsfUtil.PersistAction;
+import Entidades.Bus;
+import properties.util.JsfUtil;
+import properties.util.JsfUtil.PersistAction;
+import facade.BusFacade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,23 +19,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("reservaController")
+@Named("busController")
 @SessionScoped
-public class ReservaController implements Serializable {
+public class BusController implements Serializable {
 
     @EJB
-    private otro.ReservaFacade ejbFacade;
-    private List<Reserva> items = null;
-    private Reserva selected;
+    private facade.BusFacade ejbFacade;
+    private List<Bus> items = null;
+    private Bus selected;
 
-    public ReservaController() {
+    public BusController() {
     }
 
-    public Reserva getSelected() {
+    public Bus getSelected() {
         return selected;
     }
 
-    public void setSelected(Reserva selected) {
+    public void setSelected(Bus selected) {
         this.selected = selected;
     }
 
@@ -44,36 +45,36 @@ public class ReservaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private ReservaFacade getFacade() {
+    private BusFacade getFacade() {
         return ejbFacade;
     }
 
-    public Reserva prepareCreate() {
-        selected = new Reserva();
+    public Bus prepareCreate() {
+        selected = new Bus();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ReservaCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("BusCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ReservaUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("BusUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("ReservaDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("BusDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Reserva> getItems() {
+    public List<Bus> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -108,29 +109,29 @@ public class ReservaController implements Serializable {
         }
     }
 
-    public Reserva getReserva(java.lang.Integer id) {
+    public Bus getBus(java.lang.Integer id) {
         return getFacade().find(id);
     }
 
-    public List<Reserva> getItemsAvailableSelectMany() {
+    public List<Bus> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<Reserva> getItemsAvailableSelectOne() {
+    public List<Bus> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Reserva.class)
-    public static class ReservaControllerConverter implements Converter {
+    @FacesConverter(forClass = Bus.class)
+    public static class BusControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            ReservaController controller = (ReservaController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "reservaController");
-            return controller.getReserva(getKey(value));
+            BusController controller = (BusController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "busController");
+            return controller.getBus(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -150,11 +151,11 @@ public class ReservaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Reserva) {
-                Reserva o = (Reserva) object;
-                return getStringKey(o.getCodReserva());
+            if (object instanceof Bus) {
+                Bus o = (Bus) object;
+                return getStringKey(o.getCodBus());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Reserva.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Bus.class.getName()});
                 return null;
             }
         }

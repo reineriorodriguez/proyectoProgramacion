@@ -35,18 +35,6 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_apellido}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.apellido}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_nombre}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nombre}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsuarioTitle_pwdUsuario}"/>
                             </f:facet>
                             <h:outputText value="#{item.pwdUsuario}"/>
@@ -56,6 +44,12 @@
                                 <h:outputText value="#{bundle.ListUsuarioTitle_usrUsuario}"/>
                             </f:facet>
                             <h:outputText value="#{item.usrUsuario}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUsuarioTitle_cliente}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cliente}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

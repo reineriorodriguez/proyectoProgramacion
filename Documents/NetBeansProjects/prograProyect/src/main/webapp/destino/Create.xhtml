@@ -14,17 +14,17 @@
                     <p:panelGrid columns="2" rendered="#{destinoController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateDestinoLabel_codDestino}" for="codDestino" />
                         <p:inputText id="codDestino" value="#{destinoController.selected.codDestino}" title="#{bundle.CreateDestinoTitle_codDestino}" required="true" requiredMessage="#{bundle.CreateDestinoRequiredMessage_codDestino}"/>
-                        <p:outputLabel value="#{bundle.CreateDestinoLabel_codRuta}" for="codRuta" />
-                        <p:selectOneMenu id="codRuta" value="#{destinoController.selected.codRuta}" required="true" requiredMessage="#{bundle.EditDestinoRequiredMessage_codRuta}">
-                            <f:selectItems value="#{rutaController.itemsAvailableSelectOne}"
-                                           var="codRutaItem"
-                                           itemValue="#{codRutaItem}"/>
-                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateDestinoLabel_codHorario}" for="codHorario" />
                         <p:selectOneMenu id="codHorario" value="#{destinoController.selected.codHorario}" required="true" requiredMessage="#{bundle.EditDestinoRequiredMessage_codHorario}">
                             <f:selectItems value="#{horarioController.itemsAvailableSelectOne}"
                                            var="codHorarioItem"
                                            itemValue="#{codHorarioItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDestinoLabel_codRuta}" for="codRuta" />
+                        <p:selectOneMenu id="codRuta" value="#{destinoController.selected.codRuta}" required="true" requiredMessage="#{bundle.EditDestinoRequiredMessage_codRuta}">
+                            <f:selectItems value="#{rutaController.itemsAvailableSelectOne}"
+                                           var="codRutaItem"
+                                           itemValue="#{codRutaItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{destinoController.create}" value="#{bundle.Save}" update="display,:DestinoListForm:datalist,:growl" oncomplete="handleSubmit(args,'DestinoCreateDialog');"/>

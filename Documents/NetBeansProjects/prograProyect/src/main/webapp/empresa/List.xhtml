@@ -41,15 +41,9 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListEmpresaTitle_pwdEmpresa}"/>
+                                <h:outputText value="#{bundle.ListEmpresaTitle_codUsuario}"/>
                             </f:facet>
-                            <h:outputText value="#{item.pwdEmpresa}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListEmpresaTitle_usrEmpresa}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.usrEmpresa}"/>
+                            <h:outputText value="#{item.codUsuario}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{empresaController.prepareCreate}" update=":EmpresaCreateForm" oncomplete="PF('EmpresaCreateDialog').show()"/>

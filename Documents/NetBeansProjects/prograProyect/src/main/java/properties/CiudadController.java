@@ -1,8 +1,9 @@
-package otro;
+package properties;
 
-import entidades.Ruta;
-import otro.util.JsfUtil;
-import otro.util.JsfUtil.PersistAction;
+import Entidades.Ciudad;
+import properties.util.JsfUtil;
+import properties.util.JsfUtil.PersistAction;
+import facade.CiudadFacade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,23 +19,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("rutaController")
+@Named("ciudadController")
 @SessionScoped
-public class RutaController implements Serializable {
+public class CiudadController implements Serializable {
 
     @EJB
-    private otro.RutaFacade ejbFacade;
-    private List<Ruta> items = null;
-    private Ruta selected;
+    private facade.CiudadFacade ejbFacade;
+    private List<Ciudad> items = null;
+    private Ciudad selected;
 
-    public RutaController() {
+    public CiudadController() {
     }
 
-    public Ruta getSelected() {
+    public Ciudad getSelected() {
         return selected;
     }
 
-    public void setSelected(Ruta selected) {
+    public void setSelected(Ciudad selected) {
         this.selected = selected;
     }
 
@@ -44,36 +45,36 @@ public class RutaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private RutaFacade getFacade() {
+    private CiudadFacade getFacade() {
         return ejbFacade;
     }
 
-    public Ruta prepareCreate() {
-        selected = new Ruta();
+    public Ciudad prepareCreate() {
+        selected = new Ciudad();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("RutaCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("CiudadCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("RutaUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("CiudadUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("RutaDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("CiudadDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Ruta> getItems() {
+    public List<Ciudad> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -108,29 +109,29 @@ public class RutaController implements Serializable {
         }
     }
 
-    public Ruta getRuta(java.lang.Integer id) {
+    public Ciudad getCiudad(java.lang.Integer id) {
         return getFacade().find(id);
     }
 
-    public List<Ruta> getItemsAvailableSelectMany() {
+    public List<Ciudad> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<Ruta> getItemsAvailableSelectOne() {
+    public List<Ciudad> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Ruta.class)
-    public static class RutaControllerConverter implements Converter {
+    @FacesConverter(forClass = Ciudad.class)
+    public static class CiudadControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            RutaController controller = (RutaController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "rutaController");
-            return controller.getRuta(getKey(value));
+            CiudadController controller = (CiudadController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "ciudadController");
+            return controller.getCiudad(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -150,11 +151,11 @@ public class RutaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Ruta) {
-                Ruta o = (Ruta) object;
-                return getStringKey(o.getCodRuta());
+            if (object instanceof Ciudad) {
+                Ciudad o = (Ciudad) object;
+                return getStringKey(o.getCodCiudad());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Ruta.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Ciudad.class.getName()});
                 return null;
             }
         }

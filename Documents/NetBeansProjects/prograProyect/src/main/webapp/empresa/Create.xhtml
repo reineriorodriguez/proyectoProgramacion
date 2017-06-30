@@ -15,11 +15,13 @@
                         <p:outputLabel value="#{bundle.CreateEmpresaLabel_codEmpresa}" for="codEmpresa" />
                         <p:inputText id="codEmpresa" value="#{empresaController.selected.codEmpresa}" title="#{bundle.CreateEmpresaTitle_codEmpresa}" required="true" requiredMessage="#{bundle.CreateEmpresaRequiredMessage_codEmpresa}"/>
                         <p:outputLabel value="#{bundle.CreateEmpresaLabel_nombreEmpresa}" for="nombreEmpresa" />
-                        <p:inputText id="nombreEmpresa" value="#{empresaController.selected.nombreEmpresa}" title="#{bundle.CreateEmpresaTitle_nombreEmpresa}" />
-                        <p:outputLabel value="#{bundle.CreateEmpresaLabel_pwdEmpresa}" for="pwdEmpresa" />
-                        <p:inputText id="pwdEmpresa" value="#{empresaController.selected.pwdEmpresa}" title="#{bundle.CreateEmpresaTitle_pwdEmpresa}" />
-                        <p:outputLabel value="#{bundle.CreateEmpresaLabel_usrEmpresa}" for="usrEmpresa" />
-                        <p:inputText id="usrEmpresa" value="#{empresaController.selected.usrEmpresa}" title="#{bundle.CreateEmpresaTitle_usrEmpresa}" />
+                        <p:inputText id="nombreEmpresa" value="#{empresaController.selected.nombreEmpresa}" title="#{bundle.CreateEmpresaTitle_nombreEmpresa}" required="true" requiredMessage="#{bundle.CreateEmpresaRequiredMessage_nombreEmpresa}"/>
+                        <p:outputLabel value="#{bundle.CreateEmpresaLabel_codUsuario}" for="codUsuario" />
+                        <p:selectOneMenu id="codUsuario" value="#{empresaController.selected.codUsuario}" required="true" requiredMessage="#{bundle.EditEmpresaRequiredMessage_codUsuario}">
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="codUsuarioItem"
+                                           itemValue="#{codUsuarioItem}"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{empresaController.create}" value="#{bundle.Save}" update="display,:EmpresaListForm:datalist,:growl" oncomplete="handleSubmit(args,'EmpresaCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="EmpresaCreateDialog.hide()"/>

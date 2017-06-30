@@ -14,14 +14,16 @@
                     <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_codUsuario}" for="codUsuario" />
                         <p:inputText id="codUsuario" value="#{usuarioController.selected.codUsuario}" title="#{bundle.CreateUsuarioTitle_codUsuario}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_codUsuario}"/>
-                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_apellido}" for="apellido" />
-                        <p:inputText id="apellido" value="#{usuarioController.selected.apellido}" title="#{bundle.CreateUsuarioTitle_apellido}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_apellido}"/>
-                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{usuarioController.selected.nombre}" title="#{bundle.CreateUsuarioTitle_nombre}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_pwdUsuario}" for="pwdUsuario" />
                         <p:inputText id="pwdUsuario" value="#{usuarioController.selected.pwdUsuario}" title="#{bundle.CreateUsuarioTitle_pwdUsuario}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_pwdUsuario}"/>
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_usrUsuario}" for="usrUsuario" />
                         <p:inputText id="usrUsuario" value="#{usuarioController.selected.usrUsuario}" title="#{bundle.CreateUsuarioTitle_usrUsuario}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_usrUsuario}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_cliente}" for="cliente" />
+                        <p:selectOneMenu id="cliente" value="#{usuarioController.selected.cliente}" >
+                            <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"
+                                           var="clienteItem"
+                                           itemValue="#{clienteItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_tipoUsr}" for="tipoUsr" />
                         <p:selectOneMenu id="tipoUsr" value="#{usuarioController.selected.tipoUsr}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_tipoUsr}">
                             <f:selectItems value="#{tipousuarioController.itemsAvailableSelectOne}"

@@ -1,4 +1,4 @@
-package otro.util;
+package properties.util;
 
 import java.util.List;
 import javax.faces.application.FacesMessage;

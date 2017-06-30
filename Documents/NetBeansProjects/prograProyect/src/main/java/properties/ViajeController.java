@@ -1,8 +1,9 @@
-package otro;
+package properties;
 
-import entidades.Tipousuario;
-import otro.util.JsfUtil;
-import otro.util.JsfUtil.PersistAction;
+import Entidades.Viaje;
+import properties.util.JsfUtil;
+import properties.util.JsfUtil.PersistAction;
+import facade.ViajeFacade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,23 +19,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("tipousuarioController")
+@Named("viajeController")
 @SessionScoped
-public class TipousuarioController implements Serializable {
+public class ViajeController implements Serializable {
 
     @EJB
-    private otro.TipousuarioFacade ejbFacade;
-    private List<Tipousuario> items = null;
-    private Tipousuario selected;
+    private facade.ViajeFacade ejbFacade;
+    private List<Viaje> items = null;
+    private Viaje selected;
 
-    public TipousuarioController() {
+    public ViajeController() {
     }
 
-    public Tipousuario getSelected() {
+    public Viaje getSelected() {
         return selected;
     }
 
-    public void setSelected(Tipousuario selected) {
+    public void setSelected(Viaje selected) {
         this.selected = selected;
     }
 
@@ -44,36 +45,36 @@ public class TipousuarioController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private TipousuarioFacade getFacade() {
+    private ViajeFacade getFacade() {
         return ejbFacade;
     }
 
-    public Tipousuario prepareCreate() {
-        selected = new Tipousuario();
+    public Viaje prepareCreate() {
+        selected = new Viaje();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("TipousuarioCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ViajeCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("TipousuarioUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ViajeUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("TipousuarioDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("ViajeDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Tipousuario> getItems() {
+    public List<Viaje> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -108,29 +109,29 @@ public class TipousuarioController implements Serializable {
         }
     }
 
-    public Tipousuario getTipousuario(java.lang.Integer id) {
+    public Viaje getViaje(java.lang.Integer id) {
         return getFacade().find(id);
     }
 
-    public List<Tipousuario> getItemsAvailableSelectMany() {
+    public List<Viaje> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<Tipousuario> getItemsAvailableSelectOne() {
+    public List<Viaje> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Tipousuario.class)
-    public static class TipousuarioControllerConverter implements Converter {
+    @FacesConverter(forClass = Viaje.class)
+    public static class ViajeControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            TipousuarioController controller = (TipousuarioController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "tipousuarioController");
-            return controller.getTipousuario(getKey(value));
+            ViajeController controller = (ViajeController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "viajeController");
+            return controller.getViaje(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -150,11 +151,11 @@ public class TipousuarioController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Tipousuario) {
-                Tipousuario o = (Tipousuario) object;
-                return getStringKey(o.getCodTipo());
+            if (object instanceof Viaje) {
+                Viaje o = (Viaje) object;
+                return getStringKey(o.getCodViaje());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Tipousuario.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Viaje.class.getName()});
                 return null;
             }
         }

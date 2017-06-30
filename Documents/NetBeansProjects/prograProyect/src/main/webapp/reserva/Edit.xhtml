@@ -20,19 +20,19 @@
                         <p:calendar id="fechaSalida" pattern="MM/dd/yyyy" value="#{reservaController.selected.fechaSalida}" title="#{bundle.EditReservaTitle_fechaSalida}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_fechaSalida}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditReservaLabel_numAsientosReserva}" for="numAsientosReserva" />
                         <p:inputText id="numAsientosReserva" value="#{reservaController.selected.numAsientosReserva}" title="#{bundle.EditReservaTitle_numAsientosReserva}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_numAsientosReserva}"/>
+                        <p:outputLabel value="#{bundle.EditReservaLabel_codUsuario}" for="codUsuario" />
+                        <p:selectOneMenu id="codUsuario" value="#{reservaController.selected.codUsuario}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_codUsuario}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"
+                                           var="codUsuarioItem"
+                                           itemValue="#{codUsuarioItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditReservaLabel_codViaje}" for="codViaje" />
                         <p:selectOneMenu id="codViaje" value="#{reservaController.selected.codViaje}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_codViaje}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{viajeController.itemsAvailableSelectOne}"
                                            var="codViajeItem"
                                            itemValue="#{codViajeItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditReservaLabel_codUsuario}" for="codUsuario" />
-                        <p:selectOneMenu id="codUsuario" value="#{reservaController.selected.codUsuario}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_codUsuario}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
-                                           var="codUsuarioItem"
-                                           itemValue="#{codUsuarioItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{reservaController.update}" value="#{bundle.Save}" update="display,:ReservaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ReservaEditDialog');"/>

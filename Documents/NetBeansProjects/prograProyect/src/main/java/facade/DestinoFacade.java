@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package otro;
+package facade;
 
-import entidades.Horario;
+import Entidades.Destino;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author VJ
  */
 @Stateless
-public class HorarioFacade extends AbstractFacade<Horario> {
+public class DestinoFacade extends AbstractFacade<Destino> {
 
     @PersistenceContext(unitName = "com.example_prograProyect_war_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class HorarioFacade extends AbstractFacade<Horario> {
         return em;
     }
 
-    public HorarioFacade() {
-        super(Horario.class);
+    public DestinoFacade() {
+        super(Destino.class);
     }
     
 }

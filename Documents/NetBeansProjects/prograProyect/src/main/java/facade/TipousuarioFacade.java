@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package otro;
+package facade;
 
-import entidades.Ruta;
+import Entidades.Tipousuario;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author VJ
  */
 @Stateless
-public class RutaFacade extends AbstractFacade<Ruta> {
+public class TipousuarioFacade extends AbstractFacade<Tipousuario> {
 
     @PersistenceContext(unitName = "com.example_prograProyect_war_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class RutaFacade extends AbstractFacade<Ruta> {
         return em;
     }
 
-    public RutaFacade() {
-        super(Ruta.class);
+    public TipousuarioFacade() {
+        super(Tipousuario.class);
     }
     
 }
