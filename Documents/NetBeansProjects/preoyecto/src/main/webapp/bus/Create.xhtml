@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BusCreateDlg" widgetVar="BusCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateBusTitle}">
+            <h:form id="BusCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{busController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateBusLabel_codBus}" for="codBus" />
+                        <p:inputText id="codBus" value="#{busController.selected.codBus}" title="#{bundle.CreateBusTitle_codBus}" required="true" requiredMessage="#{bundle.CreateBusRequiredMessage_codBus}"/>
+                        <p:outputLabel value="#{bundle.CreateBusLabel_capacidadBus}" for="capacidadBus" />
+                        <p:inputText id="capacidadBus" value="#{busController.selected.capacidadBus}" title="#{bundle.CreateBusTitle_capacidadBus}" required="true" requiredMessage="#{bundle.CreateBusRequiredMessage_capacidadBus}"/>
+                        <p:outputLabel value="#{bundle.CreateBusLabel_marcaBus}" for="marcaBus" />
+                        <p:inputText id="marcaBus" value="#{busController.selected.marcaBus}" title="#{bundle.CreateBusTitle_marcaBus}" />
+                        <p:outputLabel value="#{bundle.CreateBusLabel_numBus}" for="numBus" />
+                        <p:inputText id="numBus" value="#{busController.selected.numBus}" title="#{bundle.CreateBusTitle_numBus}" required="true" requiredMessage="#{bundle.CreateBusRequiredMessage_numBus}"/>
+                        <p:outputLabel value="#{bundle.CreateBusLabel_placaBus}" for="placaBus" />
+                        <p:inputText id="placaBus" value="#{busController.selected.placaBus}" title="#{bundle.CreateBusTitle_placaBus}" />
+                        <p:outputLabel value="#{bundle.CreateBusLabel_codEmpresa}" for="codEmpresa" />
+                        <p:selectOneMenu id="codEmpresa" value="#{busController.selected.codEmpresa}" required="true" requiredMessage="#{bundle.EditBusRequiredMessage_codEmpresa}">
+                            <f:selectItems value="#{empresaController.itemsAvailableSelectOne}"
+                                           var="codEmpresaItem"
+                                           itemValue="#{codEmpresaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{busController.create}" value="#{bundle.Save}" update="display,:BusListForm:datalist,:growl" oncomplete="handleSubmit(args,'BusCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="BusCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

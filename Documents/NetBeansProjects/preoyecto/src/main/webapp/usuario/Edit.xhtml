@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsuarioEditDlg" widgetVar="UsuarioEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditUsuarioTitle}">
+            <h:form id="UsuarioEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_codUsuario}" for="codUsuario" />
+                        <p:inputText id="codUsuario" value="#{usuarioController.selected.codUsuario}" title="#{bundle.EditUsuarioTitle_codUsuario}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_codUsuario}"/>
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_pwdUsuario}" for="pwdUsuario" />
+                        <p:inputText id="pwdUsuario" value="#{usuarioController.selected.pwdUsuario}" title="#{bundle.EditUsuarioTitle_pwdUsuario}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_pwdUsuario}"/>
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_usrUsuario}" for="usrUsuario" />
+                        <p:inputText id="usrUsuario" value="#{usuarioController.selected.usrUsuario}" title="#{bundle.EditUsuarioTitle_usrUsuario}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_usrUsuario}"/>
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_tipoUsr}" for="tipoUsr" />
+                        <p:selectOneMenu id="tipoUsr" value="#{usuarioController.selected.tipoUsr}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_tipoUsr}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipousuarioController.itemsAvailableSelectOne}"
+                                           var="tipoUsrItem"
+                                           itemValue="#{tipoUsrItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{usuarioController.update}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UsuarioEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UsuarioEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

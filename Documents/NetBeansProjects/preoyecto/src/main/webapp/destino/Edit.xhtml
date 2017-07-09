@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DestinoEditDlg" widgetVar="DestinoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditDestinoTitle}">
+            <h:form id="DestinoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{destinoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditDestinoLabel_codDestino}" for="codDestino" />
+                        <p:inputText id="codDestino" value="#{destinoController.selected.codDestino}" title="#{bundle.EditDestinoTitle_codDestino}" required="true" requiredMessage="#{bundle.EditDestinoRequiredMessage_codDestino}"/>
+                        <p:outputLabel value="#{bundle.EditDestinoLabel_codRuta}" for="codRuta" />
+                        <p:selectOneMenu id="codRuta" value="#{destinoController.selected.codRuta}" required="true" requiredMessage="#{bundle.EditDestinoRequiredMessage_codRuta}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{rutaController.itemsAvailableSelectOne}"
+                                           var="codRutaItem"
+                                           itemValue="#{codRutaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDestinoLabel_codHorario}" for="codHorario" />
+                        <p:selectOneMenu id="codHorario" value="#{destinoController.selected.codHorario}" required="true" requiredMessage="#{bundle.EditDestinoRequiredMessage_codHorario}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{horarioController.itemsAvailableSelectOne}"
+                                           var="codHorarioItem"
+                                           itemValue="#{codHorarioItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{destinoController.update}" value="#{bundle.Save}" update="display,:DestinoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DestinoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DestinoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

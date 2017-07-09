@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReservaEditDlg" widgetVar="ReservaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditReservaTitle}">
+            <h:form id="ReservaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{reservaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditReservaLabel_codReserva}" for="codReserva" />
+                        <p:inputText id="codReserva" value="#{reservaController.selected.codReserva}" title="#{bundle.EditReservaTitle_codReserva}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_codReserva}"/>
+                        <p:outputLabel value="#{bundle.EditReservaLabel_fechaReserva}" for="fechaReserva" />
+                        <p:calendar id="fechaReserva" pattern="MM/dd/yyyy" value="#{reservaController.selected.fechaReserva}" title="#{bundle.EditReservaTitle_fechaReserva}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_fechaReserva}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditReservaLabel_fechaSalidaReserva}" for="fechaSalidaReserva" />
+                        <p:calendar id="fechaSalidaReserva" pattern="MM/dd/yyyy" value="#{reservaController.selected.fechaSalidaReserva}" title="#{bundle.EditReservaTitle_fechaSalidaReserva}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_fechaSalidaReserva}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditReservaLabel_codViaje}" for="codViaje" />
+                        <p:selectOneMenu id="codViaje" value="#{reservaController.selected.codViaje}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_codViaje}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{viajeController.itemsAvailableSelectOne}"
+                                           var="codViajeItem"
+                                           itemValue="#{codViajeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditReservaLabel_codUsuario}" for="codUsuario" />
+                        <p:selectOneMenu id="codUsuario" value="#{reservaController.selected.codUsuario}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_codUsuario}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="codUsuarioItem"
+                                           itemValue="#{codUsuarioItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{reservaController.update}" value="#{bundle.Save}" update="display,:ReservaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ReservaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ReservaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
